@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexusApp</title>
+    <!-- Parâmetros globais para a aplicação -->
+    <script>
+        // Substitua os valores abaixo pelos dados reais do seu Firebase
+        const __firebase_config = JSON.stringify({
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_AUTH_DOMAIN",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_STORAGE_BUCKET",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        });
+        const __app_id = "nexus-rpg-default";
+    </script>
+    <!-- Estilos externos -->
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Estilos inline -->
+    <style>
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(55, 65, 81, 0.5);
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #0ea5e9;
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #0284c7;
+        }
+        .custom-scrollbar {
+            scrollbar-width: thin;
+            scrollbar-color: #0ea5e9 rgba(55, 65, 81, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h1>Welcome to NexusApp</h1>
+        <p>This is the main application interface.</p>
+        <!-- Conteúdo adicional será renderizado pela aplicação React -->
+    </div>
+    <script src="js/script.js"></script>
+</body>
+</html>
