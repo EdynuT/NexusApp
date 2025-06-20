@@ -35,7 +35,7 @@ const PlayerSheet: React.FC = () => {
                 <h2>Secondary Stats</h2>
                 <div>Equipment Weight: ____________</div>
                 <div>Movement: ____________</div>
-                <div>Fight: ____________</div>
+                <div>Attack: ____________</div>
                 <div>Dodge: ____________</div>
                 <div>Block: ____________</div>
             </section>
@@ -43,31 +43,31 @@ const PlayerSheet: React.FC = () => {
             <section>
                 <h2>General Skills</h2>
                 <div>Acrobatics: ____________</div>
+                <div>Acting: ____________</div>
                 <div>Animal Handling: ____________</div>
                 <div>Arcana: ____________</div>
                 <div>Arts: ____________</div>
                 <div>Athletics: ____________</div>
-                <div>Performance: ____________</div>
+                <div>Cheat: ____________</div>
                 <div>Constitution: ____________</div>
                 <div>Dexterity: ____________</div>
                 <div>Diplomacy: ____________</div>
-                <div>Deception: ____________</div>
                 <div>Engineering: ____________</div>
                 <div>Faith: ____________</div>
-                <div>Strength: ____________</div>
-                <div>Stealth: ____________</div>
                 <div>History: ____________</div>
                 <div>Intellect: ____________</div>
                 <div>Intimidation: ____________</div>
-                <div>Insight: ____________</div>
+                <div>Intuition: ____________</div>
                 <div>Investigation: ____________</div>
+                <div>Marksmanship: ____________</div>
                 <div>Medicine: ____________</div>
                 <div>Nature: ____________</div>
                 <div>Perception: ____________</div>
                 <div>Persuasion: ____________</div>
                 <div>Piloting: ____________</div>
-                <div>Marksmanship: ____________</div>
                 <div>Religion: ____________</div>
+                <div>Stealth: ____________</div>
+                <div>Strength: ____________</div>
                 <div>Survival: ____________</div>
                 <div>Willpower: ____________</div>
             </section>
