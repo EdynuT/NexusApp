@@ -30,7 +30,6 @@ NexusApp
 │   ├── style/
 │   ├── package.json
 │   └── tsconfig.json
-├── node_modules/
 ├── package-lock.json
 ├── package.json
 └── README.md
