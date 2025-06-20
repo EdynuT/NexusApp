@@ -1,7 +1,7 @@
 # Game Management App
 
 ## Overview
-The Game Management App is a web application designed for players and game masters to manage tabletop role-playing games. It provides features for user authentication, campaign management, combat tracking, and character sheet viewing.
+The Game Management App is a web application designed for players and dungeon masters to manage tabletop role-playing games. It provides features for user authentication, campaign management, combat tracking, and character sheet viewing.
 
 ## Features
 - **User Authentication**: Players and game masters can register and log in to the application.
@@ -12,7 +12,22 @@ The Game Management App is a web application designed for players and game maste
 ## Project Structure
 ```
 NexusApp
-├── game-management-app
+├── Back_End/
+│   └── src/
+│       ├── controllers/
+│       ├── middlewares/
+│       ├── models/
+│       ├── routes/
+│       ├── services/
+│       └── utils/
+│
+├── Data_Base/
+│   ├── docs/
+│   ├── migrations/
+│   ├── seeds
+│   └── dump.sql
+│
+├── Front_End/
 │   ├── public/
 │   │   └── index.html
 │   ├── src/
@@ -28,8 +43,8 @@ NexusApp
 │   │   ├── App.tsx
 │   │   └── index.tsx
 │   ├── style/
-│   ├── package.json
 │   └── tsconfig.json
+│
 ├── package-lock.json
 ├── package.json
 └── README.md
