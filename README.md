@@ -28,8 +28,6 @@ NexusApp
 │   └── dump.sql
 │
 ├── Front_End/
-│   ├── public/
-│   │   └── index.html
 │   ├── src/
 │   │   ├── components/
 │   │   │   ├── Auth/
@@ -42,8 +40,13 @@ NexusApp
 │   │   ├── types/
 │   │   ├── App.tsx
 │   │   └── index.tsx
-│   ├── style/
 │   └── tsconfig.json
+│
+├── Layout/
+│   ├── public/
+│   │   └── index.html
+│   └── style/
+│       └── style.css
 │
 ├── package-lock.json
 ├── package.json
