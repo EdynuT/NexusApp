@@ -1,60 +1,65 @@
-# NexusApp
+# Game Management App
 
-NexusApp is a web application designed for managing RPG campaigns. This project includes both client-side and server-side components, allowing users to interact with the application seamlessly.
+## Overview
+The Game Management App is a web application designed for players and game masters to manage tabletop role-playing games. It provides features for user authentication, campaign management, combat tracking, and character sheet viewing.
+
+## Features
+- **User Authentication**: Players and game masters can register and log in to the application.
+- **Campaign Management**: Game masters can create, view, and manage campaigns.
+- **Combat Management**: Tools for tracking combat scenarios and initiative order.
+- **Character Sheets**: Players can view their character sheets, and game masters can access all player sheets within their campaigns.
 
 ## Project Structure
-
-```sh
-nexus-app
-├── node_modules/         # Node.js instalation modules
-├── public/
-│   ├── index.html        # Main HTML document
-│   ├── css/
-│   │   └── styles.css    # Styles for the application
-│   └── js/
-│       └── script.js     # Client-side JavaScript logic
-├── src/
-│   └── server.js         # Server-side application entry point
-├── package-lock.json     # Other instalation archives
-├── package.json          # npm configuration file
-├── LICENSE               # Licensing information
-└── README.md             # Project documentation
+```
+NexusApp
+├── game-management-app
+│   ├── public/
+│   │   └── index.html
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── Auth/
+│   │   │   ├── Campaigns/
+│   │   │   ├── Combat/
+│   │   │   ├── Dashboard/
+│   │   │   └── Sheets/
+│   │   ├── pages/
+│   │   ├── services/
+│   │   ├── types/
+│   │   ├── App.tsx
+│   │   └── index.tsx
+│   ├── style/
+│   ├── package.json
+│   └── tsconfig.json
+├── node_modules/
+├── package-lock.json
+├── package.json
+└── README.md
 ```
 
 ## Installation
 
 1. Clone the repository:
-```sh
-git clone https://github.com/EdynuT/NexusApp.git
-cd NexusApp
-```
-
-2. Install the dependencies:
-```sh
-npm install
- ```
+   ```
+   git clone https://github.com/EdynuT/NexusApp.git
+   ```
+2. Navigate to the project directory:
+   ```
+   cd NexusApp
+   ```
+3. Install the dependencies:
+   ```
+   npm install
+   ```
 
 ## Usage
-
-To start the server, run:
-```sh
-node src/server.js
-```
-
-Open your browser and navigate to `http://localhost:3000` to access the application.
-
-## Features
-
-- User authentication and management
-- Campaign management tools
-- Dice roller for in-game actions
-- Character sheets and bestiary management
-- Campaign wiki for notes and lore
+1. Start the development server:
+   ```
+   npm start
+   ```
+2. Open your browser and navigate to `http://localhost:3000` to access the application.
 
 ## Contributing
-
-Contributions are welcome! Please submit a pull request or open an issue for any suggestions or improvements.
+Contributions are welcome! Please open an issue or submit a pull request for any enhancements or bug fixes.
 
 ## License
-
 This project is licensed under the MIT License. See the LICENSE file for details.
