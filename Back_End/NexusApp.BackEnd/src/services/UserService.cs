@@ -1,63 +1,75 @@
 using NexusApp.BackEnd.src.models;
+using NexusApp.BackEnd.utils;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text.RegularExpressions;
-using NexusApp.BackEnd.utils;
 
 namespace NexusApp.BackEnd.src.services
 {
     public class UserService
     {
-        // Simulating a database with an in-memory list.
-        private static List<User> users = new List<User>();
+        private readonly AppDbContext _context;
+
+        public UserService(AppDbContext context)
+        {
+            _context = context;
+        }
 
         public List<User> GetAll()
         {
-            return users;
+            return _context.Users.ToList();
         }
 
-        // Método recomendado para criar usuário com senha em texto puro
-        public void CreateUser(string name, string email, string plainPassword, string role)
+        public void CreateUser(string name, string email, string plainPassword, string role, string userName)
         {
-            // Validação da força da senha
             var passwordPattern = @"^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':\\|,.<>\/?]).{8,}$";
             if (!Regex.IsMatch(plainPassword, passwordPattern))
                 throw new ArgumentException("Password must be at least 8 characters long and contain at least one uppercase letter, one number, and one special character.");
 
-            // Gerar o hash da senha
             string passwordHash = PasswordHasher.Hash(plainPassword);
 
-            // Criar o usuário (passando o hash)
-            var user = new User(name, email, passwordHash, role);
-            users.Add(user);
+            var user = new User(name, email, passwordHash, role)
+            {
+                UserName = userName
+            };
+            _context.Users.Add(user);
+            _context.SaveChanges();
         }
 
         public void Add(User user)
         {
-            users.Add(user);
+            _context.Users.Add(user);
+            _context.SaveChanges();
         }
 
-        public User GetByEmail(string email)
+        public User? GetByEmail(string email)
         {
-            return users.FirstOrDefault(u => u.Email == email);
+            return _context.Users.FirstOrDefault(u => u.Email == email);
         }
 
-        public bool ValidateLogin(string email, string password)
+        public User? GetByUserName(string userName)
         {
-            var user = GetByEmail(email);
+            return _context.Users.FirstOrDefault(u => u.UserName == userName);
+        }
+
+        public bool ValidateLogin(string identifier, string password)
+        {
+            var user = _context.Users.FirstOrDefault(u =>
+                u.Email == identifier || u.UserName == identifier);
+
             if (user == null)
                 return false;
 
-            // Check if user is locked out
             if (user.LockoutEnd.HasValue && user.LockoutEnd > DateTime.UtcNow)
                 throw new Exception("Account is locked. Try again later.");
 
-            // Use PasswordHasher to verify the password
             if (PasswordHasher.Verify(password, user.PasswordHash))
             {
                 user.FailedLoginAttempts = 0;
+                _context.SaveChanges();
                 return true;
             }
             else
@@ -67,33 +79,29 @@ namespace NexusApp.BackEnd.src.services
                 {
                     user.LockoutEnd = DateTime.UtcNow.AddMinutes(30);
                     user.FailedLoginAttempts = 0;
-                    throw new Exception("Account locked due to too many failed attempts.");
                 }
+                _context.SaveChanges();
                 return false;
             }
         }
 
-        // Dictionary to store password reset codes
+        // Dictionary to store password reset codes (em memória, pode ser melhorado para produção)
         private static Dictionary<string, string> passwordResetCodes = new Dictionary<string, string>();
 
-        // Creates and sends a password reset code for the corresponding email
         public string GeneratePasswordResetCode(string email)
         {
             var user = GetByEmail(email);
             if (user == null)
                 throw new Exception("User not found.");
 
-            // Create a random 6-digit code
             var code = RandomNumberGenerator.GetInt32(100000, 999999).ToString();
             passwordResetCodes[email] = code;
 
-            // Here you will send the code to the user's email.
             Console.WriteLine($"Password reset code for {email}: {code}");
 
             return code;
         }
 
-        // Validate the code and reset the password if valid 
         public bool ResetPassword(string email, string code, string newPassword)
         {
             if (!passwordResetCodes.ContainsKey(email) || passwordResetCodes[email] != code)
@@ -103,12 +111,43 @@ namespace NexusApp.BackEnd.src.services
             if (user == null)
                 return false;
 
-            // Hash the new password before saving
             user.PasswordHash = PasswordHasher.Hash(newPassword);
             passwordResetCodes.Remove(email);
             user.FailedLoginAttempts = 0;
             user.LockoutEnd = null;
+            _context.SaveChanges();
             return true;
+        }
+
+        public User? Login(LoginRequest login)
+        {
+            var user = _context.Users.FirstOrDefault(u =>
+                u.Email.Equals(login.Identifier, StringComparison.OrdinalIgnoreCase) ||
+                u.UserName.Equals(login.Identifier, StringComparison.OrdinalIgnoreCase));
+
+            if (user == null)
+                return null;
+
+            if (user.LockoutEnd.HasValue && user.LockoutEnd > DateTime.UtcNow)
+                throw new Exception("Account is locked. Try again later.");
+
+            if (PasswordHasher.Verify(login.Password, user.PasswordHash))
+            {
+                user.FailedLoginAttempts = 0;
+                _context.SaveChanges();
+                return user;
+            }
+            else
+            {
+                user.FailedLoginAttempts++;
+                if (user.FailedLoginAttempts >= 3)
+                {
+                    user.LockoutEnd = DateTime.UtcNow.AddMinutes(30);
+                    user.FailedLoginAttempts = 0;
+                }
+                _context.SaveChanges();
+                return null;
+            }
         }
     }
 }

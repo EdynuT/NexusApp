@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("NexusApp.BackEnd")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d4ffce9f80be7d4dd7639c6cba440da9c7bb9f77")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a74fa9399aa436eecc07e9e01f5cbc0fc247011a")]
 [assembly: System.Reflection.AssemblyProductAttribute("NexusApp.BackEnd")]
 [assembly: System.Reflection.AssemblyTitleAttribute("NexusApp.BackEnd")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
