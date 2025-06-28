@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\buildMultiTargeting\NexusApp.BackEnd.props" />
-</Project>
